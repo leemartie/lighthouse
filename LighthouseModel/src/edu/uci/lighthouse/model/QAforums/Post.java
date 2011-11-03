@@ -33,6 +33,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 import edu.uci.lighthouse.LHmodelExtensions.LHclassPluginExtension;
+import edu.uci.lighthouse.model.jpa.AbstractDAO;
 
 @Entity
 public class Post extends Observable implements Serializable {
@@ -58,8 +59,8 @@ public class Post extends Observable implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private ForumThread thread;
 
-	@Temporal(javax.persistence.TemporalType.TIMESTAMP)
-	private Date postTime;
+	
+	private String postTime;
 
 	public Post() {
 	}
@@ -70,7 +71,7 @@ public class Post extends Observable implements Serializable {
 		this.question = isQuestion;
 		this.message = message;
 		this.author = author;
-		postTime = new Date();
+		postTime = AbstractDAO.getTimeOnServer();
 	}
 
 	private void observeResponses() {
@@ -197,11 +198,11 @@ public class Post extends Observable implements Serializable {
 		return thread;
 	}
 
-	public void setPostTime(Date postTime) {
+	public void setPostTime(String postTime) {
 		this.postTime = postTime;
 	}
 
-	public Date getPostTime() {
+	public String getPostTime() {
 		return postTime;
 	}
 

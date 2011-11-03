@@ -50,7 +50,7 @@ public abstract class AbstractDAO<T, PK extends Serializable> implements Interfa
 		return result;
 	}
 	
-	public String getTimeOnServer(){
+	public static String getTimeOnServer(){
 		EntityManager entityManager;
 		Object date = null;
 		try {
