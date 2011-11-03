@@ -49,6 +49,24 @@ public abstract class AbstractDAO<T, PK extends Serializable> implements Interfa
 		JPAUtility.closeEntityManager(entityManager);
 		return result;
 	}
+	
+	public String getTimeOnServer(){
+		EntityManager entityManager;
+		Object date = null;
+		try {
+			entityManager = JPAUtility.createEntityManager();
+		    Query query = entityManager.createNativeQuery(
+		            "SELECT CURRENT_TIMESTAMP");
+		    date =  query.getSingleResult();
+
+			JPAUtility.closeEntityManager(entityManager);
+		} catch (JPAException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date.toString();
+
+	}
  
 	@SuppressWarnings("unchecked")
 	public synchronized List<T> executeNamedQuery(String nameQuery,
